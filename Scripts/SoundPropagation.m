@@ -1,12 +1,15 @@
-ctd1 = load("../CTD/CTD1.mat");
-ctd2 = load("../CTD/CTD2.mat");
-ctd3 = load("../CTD/CTD3.mat");
-ctd4 = load("../CTD/CTD4.mat");
-ctd5 = load("../CTD/CTD5.mat");
-ctd6 = load("../CTD/CTD6.mat");
-ctd7 = load("../CTD/CTD7.mat");
-ctd8 = load("../CTD/CTD8.mat");
-ctd9 = load("../CTD/CTD9.mat");
+% *Andreas Hølleland
+% *2022
+
+ctd1 = load("../Data/CTD/CTD1.mat");
+ctd2 = load("../Data/CTD/CTD2.mat");
+ctd3 = load("../Data/CTD/CTD3.mat");
+ctd4 = load("../Data/CTD/CTD4.mat");
+ctd5 = load("../Data/CTD/CTD5.mat");
+ctd6 = load("../Data/CTD/CTD6.mat");
+ctd7 = load("../Data/CTD/CTD7.mat");
+ctd8 = load("../Data/CTD/CTD8.mat");
+ctd9 = load("../Data/CTD/CTD9.mat");
 
 ctd = [ctd1, ctd2, ctd3, ctd4, ctd5, ctd6, ctd7, ctd8, ctd9];
 
@@ -48,10 +51,10 @@ zz = Z1;
 cc = SV1;
 plotflag = true;
 
-[x z t d] = traceray(xo,zo,theta0,tt,zz,cc,plotflag);
+[x z t d] = raytrace(xo,zo,theta0,tt,zz,cc,plotflag);
 
 
-function [xxf, zzf, ttf, ddf] = traceray(xo,zo, theta0,tt,zz,cc,plotflag)
+function [xxf, zzf, ttf, ddf] = raytrace(xo,zo, theta0,tt,zz,cc,plotflag)
     %% A function to raytrace through a sound speed profile to a given time.
     %
     % *Val Schmidt

@@ -1,3 +1,6 @@
+% *Andreas Hølleland
+% *2022
+
 % --------- LOG -----------------------------------------------------------
 % 12:56 Starting hydrophone
 % 12:58 Starting 67kHz tags

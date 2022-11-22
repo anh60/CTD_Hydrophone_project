@@ -1,16 +1,17 @@
-ctd1 = load("../CTD/CTD1.mat");
-ctd2 = load("../CTD/CTD2.mat");
-ctd3 = load("../CTD/CTD3.mat");
-ctd4 = load("../CTD/CTD4.mat");
-ctd5 = load("../CTD/CTD5.mat");
-ctd6 = load("../CTD/CTD6.mat");
-ctd7 = load("../CTD/CTD7.mat");
-ctd8 = load("../CTD/CTD8.mat");
-ctd9 = load("../CTD/CTD9.mat");
+% *Andreas Hølleland
+% *2022
 
+ctd1 = load("../Data/CTD/CTD1.mat");
+ctd2 = load("../Data/CTD/CTD2.mat");
+ctd3 = load("../Data/CTD/CTD3.mat");
+ctd4 = load("../Data/CTD/CTD4.mat");
+ctd5 = load("../Data/CTD/CTD5.mat");
+ctd6 = load("../Data/CTD/CTD6.mat");
+ctd7 = load("../Data/CTD/CTD7.mat");
+ctd8 = load("../Data/CTD/CTD8.mat");
+ctd9 = load("../Data/CTD/CTD9.mat");
 
 plotSV(ctd2);
-
 
 % Sound velocity approximation
 function [C1, C2, C3] = calculate_SV(T, S, Z)
