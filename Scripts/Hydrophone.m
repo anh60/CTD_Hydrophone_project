@@ -48,7 +48,7 @@
 
 % First transmission happens at 11:12 (13:12, data has +2 hours error)
 
-[y, Fs] = audioread("../Hydrophone/1114.wav");
+[y, Fs] = audioread("../Data/Hydrophone/1114.wav");
 
 
 % --------- SPECTROGRAM ---------------------------------------------------
@@ -62,8 +62,8 @@ noverlap = 256;
 nfft = [];
 %nfft = 685000:69500;
 
-figure(7)
-spectrogram(y, window, noverlap, nfft, Fs, 'yaxis');
+%figure(7)
+%spectrogram(y, window, noverlap, nfft, Fs, 'yaxis');
 
 
 % ---------- BUTTERWORTH FILTER -------------------------------------------
@@ -80,14 +80,16 @@ Fny = Fs/2;
 [b69, a69] = butter(n_order, Fc69/Fny);
 
 % Plot 67kHz filter
-figure(1);
-freqz(b67, a67, [], Fs);
+%figure(1);
+%freqz(b67, a67, [], Fs);
 % Plot 69kHz filter
-figure(2);
-freqz(b67, a67, [], Fs);
+%figure(2);
+%freqz(b67, a67, [], Fs);
 
 
 % ---------- PLOT FILTERED DATA -------------------------------------------
+
+x = length(y)/Fs;
 
 % Raw data (no filter)
 figure(3)
@@ -104,4 +106,6 @@ y69 = filter(b69, a69, y);
 figure(5);
 plot(y69)
 title("Filtered data 69kHz");
+
+
 
