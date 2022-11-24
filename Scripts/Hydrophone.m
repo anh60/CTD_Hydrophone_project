@@ -72,7 +72,7 @@ nfft = [];
 Fc67 = [66500 67500];
 Fc69 = [68500 69500];
 
-n_order = 8;
+n_order = 6;    % 8 is maximum order
 Fny = Fs/2;
 
 % Filter coefficients
@@ -92,8 +92,8 @@ Fny = Fs/2;
 x = length(y)/Fs;
 
 % Raw data (no filter)
-figure(3)
-plot(y)
+%figure(3)
+%plot(y)
 title("Raw data (no filter)");
 
 % Filter the data
@@ -106,6 +106,64 @@ y69 = filter(b69, a69, y);
 figure(5);
 plot(y69)
 title("Filtered data 69kHz");
+
+
+% ---------- DEMODULATION OF DATA -----------------------------------------
+
+% Code-Type 256 = 360ms difference (+-1ms)
+ct_min = int32(0.351*Fs);
+ct_max = int32(0.361*Fs);
+
+% Peak threshold
+ymax = 2*10^-4;
+
+% Sampling interval
+t0 = 10;
+t1 = 15;
+x0 = int32(t0*Fs);
+x1 = int32(t1*Fs);
+
+x_start = 0;
+ct_done = 0;
+ct_time = 0;
+
+for x = x0:1:x1
+    if(ct_done == 0)
+        % Check for pulse
+        if(y69(x) > ymax)
+            % Check if it is the first pulse
+            if(x_start == 0)
+                x_start = x;
+            end
+            % Check for Code-Type match
+            x_delta = x - x_start;
+            if(x_delta >= ct_min && x_delta <= ct_max)
+                ct_time = double(x_delta) / Fs;
+                ct_done = x;
+            end
+        end
+    else
+        break; % exit loop
+    end
+end
+
+ct_done
+ct_time
+
+gt_done = 0;
+gt_time = 0;
+x_start = 0;
+ct_done = ct_done+25600;
+
+for x = (ct_done):x1
+    if(gt_done == 1)
+    else
+        break;
+    end
+end
+
+
+
 
 
 
