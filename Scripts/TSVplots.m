@@ -35,17 +35,20 @@ function [] = plotSingle(ctd)
     figure(1);
     plot(ctd.Temperature, ctd.Depth);
     set(gca, 'YDir', 'reverse');
-    title('Depth / Temperature');
+    xlabel('Temperature')
+    ylabel('Depth')
 
     figure(2);
     plot(ctd.Salinity, ctd.Depth);
     set(gca, 'YDir', 'reverse');
-    title('Depth / Salinity');
+    xlabel('Salinity')
+    ylabel('Depth')
 
     figure(3);
     plot(ctd.Sound_velocity, ctd.Depth);
     set(gca, 'YDir', 'reverse');
-    title('Depth / Sound Velocity');
+    xlabel('Sound Velocity')
+    ylabel('Depth')
 end
 
 % Plot all positions
@@ -57,7 +60,8 @@ function [] = plotAll(T, Z, S, V)
     end
     hold off
     set(gca, 'YDir', 'reverse');
-    title('Depth / Temperature');
+    xlabel('Temperature')
+    ylabel('Depth')
     legend('1', '2', '3', '4', '5', '6', '7', '8', '9');
 
     figure(2);
@@ -67,7 +71,8 @@ function [] = plotAll(T, Z, S, V)
     end
     hold off
     set(gca, 'YDir', 'reverse');
-    title('Depth / Salinity');
+    xlabel('Salinity')
+    ylabel('Depth')
     legend('1', '2', '3', '4', '5', '6', '7', '8', '9');
 
     figure(3);
@@ -76,7 +81,8 @@ function [] = plotAll(T, Z, S, V)
         plot(V{1, i}, Z{1, i});
     end
     hold off
-    title('Depth / Sound Velocity');
+    xlabel('Sound Velocity')
+    ylabel('Depth')
     set(gca, 'YDir', 'reverse');
     legend('1', '2', '3', '4', '5', '6', '7', '8', '9');
 end

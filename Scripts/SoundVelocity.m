@@ -14,6 +14,7 @@ ctd9 = load("../Data/CTD/CTD9.mat");
 plotSV(ctd2);
 
 % Sound velocity approximation
+% SonTek Castaway-CTD data is derived using Chen-Millero.
 function [C1, C2, C3] = calculate_SV(T, S, Z)
     % Calder, MacPhee
     C1 = 1449.2 + 4.6*T - 0.055*T^2 + 0.0029*T^3 ... 
@@ -49,7 +50,6 @@ function [] = plotSV(ctd)
     % CTD sound velocity
     figure(1)
     plot(SV, Z)
-    title('Sound Velocity / Depth')
     set(gca, 'YDir', 'reverse');
     
     hold on
@@ -62,4 +62,6 @@ function [] = plotSV(ctd)
     hold off
 
     legend('CTD', 'Calder', 'Mackenzie', 'Leroy')
+    xlabel('Sound Velocity')
+    ylabel('Depth')
 end
