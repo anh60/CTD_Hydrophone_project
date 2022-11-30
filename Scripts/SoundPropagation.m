@@ -1,6 +1,19 @@
 % *Andreas Hølleland
 % *2022
 
+% Bathymetry data : (row, 1) = Latitude, (row, 2) = Longitude, (row, 3) = Depth
+data = readmatrix("../Data/Bathymetry/Depth_data.txt");
+
+x = [];
+y = [];
+z = [];
+
+for i = 1:length(data)
+    y(i) = data(i, 1);
+    x(i) = data(i, 2);
+    z(i) = data(i, 3);
+end
+
 ctd1 = load("../Data/CTD/CTD1.mat");
 ctd2 = load("../Data/CTD/CTD2.mat");
 ctd3 = load("../Data/CTD/CTD3.mat");
@@ -44,14 +57,21 @@ SV8 = ctd(8).Sound_velocity;
 SV9 = ctd(9).Sound_velocity;
 
 xo = 0;
-zo = 5;
-theta0 = -30:5:30;
-tt = 0.3;
+zo = 10;
+theta0 = -30:2:30;
+tt = 0.4;
 zz = Z1;
 cc = SV1;
 plotflag = true;
 
+figure(1)
+hold on
 [x z t d] = raytrace(xo,zo,theta0,tt,zz,cc,plotflag);
+yline(0, 'b', 'LineWidth', 2)
+yline(max(zz), 'LineWidth', 2)
+axis padded
+hold off
+title('Dybde=10, Vinkel=60, Nrays=30')
 
 
 function [xxf, zzf, ttf, ddf] = raytrace(xo,zo, theta0,tt,zz,cc,plotflag)
@@ -188,7 +208,9 @@ function [xxf, zzf, ttf, ddf] = raytrace(xo,zo, theta0,tt,zz,cc,plotflag)
         % then bottom then surface, etc. up to a maximum of MAXBOUNCE reflections. This
         % provides a single profile through which a ray may be traced seamlessly
         % handling reflections off each surface.
-        MAXBOUNCE = 20;
+
+        MAXBOUNCE = 200;
+
         Nsvp = length(zz);
         zzend = zz(end);
         

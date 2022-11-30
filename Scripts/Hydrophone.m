@@ -48,7 +48,7 @@
 
 % First transmission happens at 11:12 (13:12, data has +2 hours error)
 
-[y, fs] = audioread("../Data/Hydrophone/1113.wav");
+[y, fs] = audioread("../Data/Hydrophone/1150.wav");
 data = readcell("../Data/TBR700/TagDetFiltered.csv");
 
 % TBR700RT is 48 seconds ahead of hydrophone (wav_time - 48)
@@ -58,17 +58,17 @@ wavEndTime = 1600;
 
 % --------- SPECTROGRAM ---------------------------------------------------
 
-% % window = [];
-% window = hamming(512);
+%window = [];
+window = hamming(512);
 
-% noverlap = [];
-% % noverlap = 256;
+noverlap = [];
+% noverlap = 256;
 
-% nfft = [];
-% % nfft = 685000:69500;
+nfft = [];
+% nfft = 685000:69500;
 
-% figure(1)
-% spectrogram(y, window, noverlap, nfft, Fs, 'yaxis');
+figure(1)
+spectrogram(y, window, noverlap, nfft, Fs, 'yaxis');
 
 
 % ---------- BUTTERWORTH FILTER -------------------------------------------
@@ -76,8 +76,8 @@ wavEndTime = 1600;
 f67 = 67000;
 f69 = 69000;
 
-fc67 = 500;
-fc69 = 500;
+fc67 = 75;
+fc69 = 50;
 
 fb67 = [f67-fc67,f67+fc67];
 fb69 = [f69-fc69,f69+fc69];
@@ -91,12 +91,12 @@ Fny = fs/2;
 
 % ---------- PLOT BUTTERWORTH ---------------------------------------------
 
-% % Plot 67kHz filter
-% figure(2);
-% freqz(b67, a67, [], Fs);
-% % Plot 69kHz filter
-% figure(3);
-% freqz(b67, a67, [], Fs);
+% Plot 67kHz filter
+figure(2);
+freqz(b67, a67, [], Fs);
+% Plot 69kHz filter
+figure(3);
+freqz(b67, a67, [], Fs);
 
 
 % ---------- FILTER DATA --------------------------------------------------
@@ -113,10 +113,10 @@ y69 = filtfilt(b69, a69, y);
 
 % ---------- PLOT DATA ----------------------------------------------------
 
-% % Raw data (no filter)
-% figure(4)
-% %plot(y)
-% title("Raw data (no filter)");
+% Raw data (no filter)
+figure(4)
+plot(x,y)
+title("Raw data (no filter)");
 
 % figure(5);
 % plot(x,y67)
@@ -136,13 +136,11 @@ mEnd = 48;% 83;
 [times] = getTimes(mStart, mEnd, data);
 [ids] = getId(mStart, mEnd, data);
 
-times
-
 % 67kHz
 figure(6)
 plot(x, y67)
 hold on
-plotId(times, ids);
+%plotId(times, ids);
 %getData(times, ids, wavStartTime, wavEndTime);
 hold off
 axis padded
@@ -152,7 +150,7 @@ title("67kHz");
 figure(7)
 plot(x, y69)
 hold on
-plotId(times, ids);
+%plotId(times, ids);
 %getData(times, ids, wavStartTime, wavEndTime);
 hold off
 axis padded

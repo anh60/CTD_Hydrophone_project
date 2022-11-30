@@ -59,24 +59,13 @@ figure(1)
 getData(times, ids, mStart, mEnd);
 
 % Match measurements with hydrophone sampling frequency
-Fs = 256000;
-
 function[] = getData(times, id, startTime, endTime)
     [ftime, fid] = filterTime(times, id, startTime, endTime);
-    string1 = num2str(startTime);
-    startMin = string1(1:2);
-
     for i = 1:length(ftime)
         string = num2str(ftime(i));
-        min = str2double(string(1:2));
-        sec = str2double(string(3:4));
-
-        if(min ~= startMin)
-            ftime(i) = ftime(i-1) + sec;
-        else
-            ftime(i) = sec;
-        end
-
+        min = string(1:2);
+        sec = string(3:4);
+        ftime(i) = strcat(min,sec);
     end
     figure(1)
     hold on

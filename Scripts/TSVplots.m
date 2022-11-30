@@ -27,8 +27,8 @@ for i = 1:length(ctd)
     V{1, i} = ctd(i).Sound_velocity;
 end
 
-%plotSingle(ctd(1));
-plotAll(T, Z, S, V)
+plotSingle(ctd(1));
+%plotAll(T, Z, S, V)
 
 % Plot a single position
 function [] = plotSingle(ctd)
@@ -49,6 +49,12 @@ function [] = plotSingle(ctd)
     set(gca, 'YDir', 'reverse');
     xlabel('Sound Velocity')
     ylabel('Depth')
+
+    figure(4);
+    plot(ctd.Sound_velocity, ctd.Density);
+    %set(gca, 'YDir', 'reverse');
+    xlabel('Sound Velocity')
+    ylabel('Density')
 end
 
 % Plot all positions
